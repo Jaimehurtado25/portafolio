@@ -52,10 +52,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const navMenu = document.querySelector('.nav-menu');
     
     // Agregar evento de clic al botón hamburguesa
-    if (navToggle) {
-        navToggle.addEventListener('click', function() {
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', function(event) {
+            // Prevenir que el evento se propague
+            event.stopPropagation();
             // Alternar la clase 'active' en el menú
             navMenu.classList.toggle('active');
+            // Cambiar el ícono del botón
+            if (navMenu.classList.contains('active')) {
+                navToggle.textContent = '✕';
+            } else {
+                navToggle.textContent = '☰';
+            }
         });
     }
     
@@ -93,17 +101,33 @@ document.addEventListener('DOMContentLoaded', function() {
             // Cerrar el menú móvil después de hacer clic en un enlace
             if (navMenu && navMenu.classList.contains('active')) {
                 navMenu.classList.remove('active');
+                // Restaurar el ícono del botón
+                if (navToggle) {
+                    navToggle.textContent = '☰';
+                }
             }
         });
     });
     
     // Cerrar el menú al hacer clic fuera de él
-    document.addEventListener('click', function(event) {
-        const isClickInsideNav = navMenu.contains(event.target) || navToggle.contains(event.target);
-        if (!isClickInsideNav && navMenu.classList.contains('active')) {
-            navMenu.classList.remove('active');
-        }
-    });
+    if (navMenu && navToggle) {
+        document.addEventListener('click', function(event) {
+            const isClickInsideNav = navMenu.contains(event.target) || navToggle.contains(event.target);
+            if (!isClickInsideNav && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                // Restaurar el ícono del botón
+                navToggle.textContent = '☰';
+            }
+        });
+        
+        // Cerrar el menú al hacer scroll
+        window.addEventListener('scroll', function() {
+            if (navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                navToggle.textContent = '☰';
+            }
+        });
+    }
     
     // ============================================
     // EFECTO DE APARICIÓN EN SCROLL (ANIMACIÓN)
