@@ -99,6 +99,7 @@ img {
     display: flex;
     list-style: none;
     gap: var(--spacing-md);
+    align-items: center;
 }
 
 .nav-menu a {
@@ -107,6 +108,7 @@ img {
     font-weight: 500;
     transition: var(--transition);
     position: relative;
+    padding: var(--spacing-xs) 0;
 }
 
 /* Efecto hover en enlaces del menú */
@@ -622,6 +624,12 @@ img {
         font-size: 1.3rem;
     }
     
+    /* Mostrar botón hamburguesa en móviles */
+    .nav-toggle {
+        display: block;
+    }
+    
+    /* Ocultar menú normal y convertirlo en desplegable */
     .nav-menu {
         display: none;
         position: absolute;
@@ -635,8 +643,10 @@ img {
         gap: var(--spacing-sm);
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         z-index: 1000;
+        width: 100%;
     }
     
+    /* Mostrar menú cuando está activo */
     .nav-menu.active {
         display: flex;
     }
@@ -647,19 +657,14 @@ img {
     
     .nav-menu a {
         display: block;
-        padding: var(--spacing-xs) var(--spacing-sm);
+        padding: var(--spacing-sm);
         width: 100%;
+        text-align: center;
+        border-radius: 8px;
     }
     
-    /* Botón hamburguesa */
-    .nav-toggle {
-        display: block;
-        background: none;
-        border: none;
-        color: var(--text-primary);
-        font-size: 1.5rem;
-        cursor: pointer;
-        padding: var(--spacing-xs);
+    .nav-menu a:hover {
+        background: rgba(99, 102, 241, 0.1);
     }
     
     .hero {
@@ -812,10 +817,22 @@ img {
     }
 }
 
-/* Ocultar botón hamburguesa en desktop */
+/* Ocultar botón hamburguesa en desktop - siempre visible en móviles */
 .nav-toggle {
     display: none;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: var(--spacing-xs);
     z-index: 1001;
+    transition: var(--transition);
+}
+
+.nav-toggle:hover {
+    color: var(--color-primary);
+    transform: scale(1.1);
 }
 
 
