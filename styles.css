@@ -1,0 +1,585 @@
+/* ============================================
+   ESTILOS GLOBALES Y RESET
+   ============================================ */
+
+/* Reset básico para eliminar márgenes y paddings por defecto */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Variables CSS para colores elegantes y mantener consistencia */
+:root {
+    /* Colores principales elegantes */
+    --color-primary: #6366f1;        /* Indigo elegante */
+    --color-primary-dark: #4f46e5;  /* Indigo más oscuro */
+    --color-secondary: #ec4899;     /* Rosa elegante */
+    --color-accent: #10b981;         /* Verde esmeralda */
+    --color-accent-2: #06b6d4;      /* Cian elegante */
+    
+    /* Colores de fondo */
+    --bg-primary: #0f172a;           /* Fondo oscuro elegante */
+    --bg-secondary: #1e293b;         /* Fondo secundario */
+    --bg-light: #f8fafc;             /* Fondo claro para contraste */
+    --bg-card: #1e293b;              /* Fondo de tarjetas */
+    
+    /* Colores de texto */
+    --text-primary: #f1f5f9;         /* Texto principal claro */
+    --text-secondary: #cbd5e1;       /* Texto secundario */
+    --text-dark: #1e293b;            /* Texto oscuro */
+    
+    /* Tipografía */
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    
+    /* Espaciado */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+    
+    /* Transiciones */
+    --transition: all 0.3s ease;
+}
+
+/* Estilos base del body */
+body {
+    font-family: var(--font-family);
+    background: linear-gradient(135deg, var(--bg-primary) 0%, #1e293b 100%);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Contenedor principal para limitar el ancho del contenido */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+/* ============================================
+   NAVEGACIÓN (NAVBAR)
+   ============================================ */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(10px);
+    padding: var(--spacing-sm) 0;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-brand h2 {
+    color: var(--color-primary);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: var(--spacing-md);
+}
+
+.nav-menu a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+    position: relative;
+}
+
+/* Efecto hover en enlaces del menú */
+.nav-menu a:hover {
+    color: var(--color-primary);
+}
+
+.nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--color-primary);
+    transition: var(--transition);
+}
+
+.nav-menu a:hover::after {
+    width: 100%;
+}
+
+/* ============================================
+   SECCIÓN HERO (PRESENTACIÓN)
+   ============================================ */
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+    background: linear-gradient(135deg, var(--bg-primary) 0%, #1e293b 50%, var(--bg-primary) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efecto de fondo animado */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
+    animation: float 20s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+.hero-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--spacing-xl);
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* Foto de perfil (avatar) */
+.profile-image {
+    position: relative;
+}
+
+.profile-image img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    border-radius: 50%;
+    border: 4px solid var(--color-primary);
+    box-shadow: 0 20px 60px rgba(99, 102, 241, 0.3);
+    transition: var(--transition);
+}
+
+.profile-image img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 25px 70px rgba(99, 102, 241, 0.5);
+}
+
+/* Texto del hero */
+.hero-text {
+    z-index: 1;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitle {
+    font-size: 1.8rem;
+    color: var(--color-accent-2);
+    margin-bottom: var(--spacing-md);
+    font-weight: 500;
+}
+
+.hero-description {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.8;
+}
+
+/* ============================================
+   BOTONES
+   ============================================ */
+
+.btn-primary,
+.btn-secondary {
+    display: inline-block;
+    padding: 14px 32px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+    cursor: pointer;
+    border: none;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+}
+
+.btn-secondary:hover {
+    background: var(--color-primary);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* ============================================
+   SECCIÓN DE EXPERIENCIA
+   ============================================ */
+
+.experience {
+    padding: var(--spacing-xl) 0;
+    background: var(--bg-secondary);
+}
+
+.section-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Grid de experiencias */
+.experience-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+}
+
+.experience-card {
+    background: var(--bg-card);
+    padding: var(--spacing-md);
+    border-radius: 12px;
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    transition: var(--transition);
+}
+
+.experience-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-primary);
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+}
+
+.experience-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.experience-card h3 {
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-xs);
+    font-size: 1.3rem;
+}
+
+.experience-period {
+    color: var(--color-accent-2);
+    font-weight: 500;
+    margin-bottom: var(--spacing-sm);
+}
+
+.experience-description {
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+/* Sección de habilidades */
+.skills-section {
+    margin-top: var(--spacing-xl);
+}
+
+.skills-title {
+    font-size: 2rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--text-primary);
+    text-align: center;
+}
+
+.skills-grid {
+    display: grid;
+    gap: var(--spacing-md);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.skill-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.skill-name {
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.skill-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(99, 102, 241, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.skill-progress {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    border-radius: 4px;
+    transition: width 1s ease;
+}
+
+/* ============================================
+   SECCIÓN DE PROYECTOS
+   ============================================ */
+
+.projects {
+    padding: var(--spacing-xl) 0;
+    background: var(--bg-primary);
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.project-card {
+    background: var(--bg-card);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    transition: var(--transition);
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(99, 102, 241, 0.3);
+}
+
+.project-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.project-card:hover .project-image img {
+    transform: scale(1.1);
+}
+
+.project-content {
+    padding: var(--spacing-md);
+}
+
+.project-content h3 {
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-xs);
+    font-size: 1.3rem;
+}
+
+.project-content p {
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.7;
+}
+
+/* ============================================
+   SECCIÓN DE CONTACTO
+   ============================================ */
+
+.contact {
+    padding: var(--spacing-xl) 0;
+    background: var(--bg-secondary);
+}
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--spacing-xl);
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Formulario de contacto */
+.contact-form {
+    background: var(--bg-card);
+    padding: var(--spacing-md);
+    border-radius: 12px;
+    border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.form-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.form-group label {
+    display: block;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-xs);
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 8px;
+    background: rgba(15, 23, 42, 0.5);
+    color: var(--text-primary);
+    font-family: var(--font-family);
+    transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+/* Enlaces sociales */
+.social-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.social-links h3 {
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.social-icons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    background: var(--bg-card);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-secondary);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    transition: var(--transition);
+}
+
+.social-icon:hover {
+    background: var(--color-primary);
+    color: white;
+    transform: translateX(5px);
+}
+
+.social-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+.footer {
+    background: var(--bg-primary);
+    padding: var(--spacing-md) 0;
+    text-align: center;
+    border-top: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.footer p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* ============================================
+   DISEÑO RESPONSIVE
+   ============================================ */
+
+/* Tablets */
+@media (max-width: 968px) {
+    .hero-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .contact-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Móviles */
+@media (max-width: 768px) {
+    .nav-menu {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.4rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .experience-grid,
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
